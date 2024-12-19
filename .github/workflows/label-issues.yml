@@ -1,0 +1,20 @@
+# This workflow will triage issues and apply a label based on the
+# types: reopened or opend.
+
+name: Lable issues
+on:
+  issues:
+    types:
+      - reopened
+      - opened
+jobs:
+  label_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+    - name: Lable issues
+      uses: actions/labeler@v4
+      with:
+        add-labels: "Triage"
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
