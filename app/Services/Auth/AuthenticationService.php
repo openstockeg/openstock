@@ -5,6 +5,7 @@ namespace App\Services\Auth;
 use App\Enums\LoginType;
 use App\Enums\OTPType;
 use App\Models\Employee;
+use App\Models\User;
 use App\Traits\GeneralTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Hash;
@@ -14,13 +15,13 @@ class AuthenticationService extends AuthBaseService
 {
     use GeneralTrait, UploadTrait;
 
-    private $model;
+    private string $model;
     private $entity;
 
-    public function __construct($model)
+    public function __construct()
     {
-        $this->model = $model;
-        parent::__construct($model);
+        $this->model = User::class;
+        parent::__construct(User::class);
     }
 
 
@@ -77,15 +78,34 @@ class AuthenticationService extends AuthBaseService
 
         try {
             DB::beginTransaction();
-            $this->entity = auth('merchant')->user();
-            $this->entity->update($request);
+            $this->entity = auth()->user();
+            if ($this->entity->merchant) {
+                return [
+                    'key' => 'fail',
+                    'msg' => __('auth.profile_already_completed'),
+                ];
+            }
+            $merchant = $this->entity->merchant()->create([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+            ]);
+
+            $merchant->store()->create([
+                'name' => $request->get('store_name'),
+                'activity' => $request->get('activity'),
+                'lat' => $request->get('lat'),
+                'lng' => $request->get('lng'),
+                'address' => $request->get('address'),
+                'commercial_register' => $request->get('commercial_register'),
+                'currency' => $request->get('currency'),
+                'store_size' => $request->get('store_size'),
+            ]);
 
             DB::commit();
 
             return [
                 'key' => 'success',
                 'msg' => __('auth.profile_completed'),
-                'user' => $this->entity->refresh()
             ];
         } catch (\Exception $e) {
             DB::rollback();

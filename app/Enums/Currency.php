@@ -11,8 +11,9 @@ namespace App\Enums;
  * @method static array forApi()
  * @method static string slug(int $value)
  */
-class LoginType extends Base
+class Currency extends Base
 {
-    public const NORMAL = 'normal';
-    public const CODE = 'code';
+    public const USD = 'USD';
+    public const EUR = 'EUR';
+    public const EGP = 'EGP';
 }

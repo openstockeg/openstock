@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class User extends Authenticatable
+class User extends AuthBaseModel
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +19,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
     ];
 
     /**
@@ -45,4 +44,32 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function otps(): MorphMany
+    {
+        return $this->morphMany(AuthOtp::class, 'otpable');
+    }
+
+    /**
+     * Get all the user's devices.
+     */
+    public function devices(): MorphMany
+    {
+        return $this->morphMany(Device::class, 'devicable');
+    }
+
+    /**
+     * Get user's current device.
+     */
+    public function currentDevice(): MorphOne
+    {
+        return $this->morphOne(Device::class, 'devicable')->where('is_current', true);
+    }
+
+    public function merchant(): HasOne
+    {
+        return $this->hasOne(Merchant::class);
+    }
+
 }

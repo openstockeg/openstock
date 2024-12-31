@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 /**
- * Class BannerType
+ * Class OrderPayType
  *
  * @method static string all()
  * @method static string|null nameFor($value)
@@ -11,8 +11,8 @@ namespace App\Enums;
  * @method static array forApi()
  * @method static string slug(int $value)
  */
-class LoginType extends Base
-{
-    public const NORMAL = 'normal';
-    public const CODE = 'code';
+class DeviceType extends Base {
+    public const WEB     = 'web';
+    public const IOS     = 'ios';
+    public const ANDROID = 'android';
 }
