@@ -318,7 +318,7 @@ class AuthenticationService extends AuthBaseService
             // delete the user's otp
             $entity->otps()->where(['type' => OTPType::FORGET_PASSWORD, 'code' => $request->code])->delete();
 
-            // Update the user's password
+            // UpdateProfile the user's password
             $entity->update(['password' => $request['password']]);
 
             // Commit the transaction

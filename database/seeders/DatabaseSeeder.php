@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'phone' => '1234567890',
         ]);
+
+        $this->call([
+            StaticPageSeeder::class,
+        ]);
     }
 }

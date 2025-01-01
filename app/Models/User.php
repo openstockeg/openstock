@@ -20,6 +20,9 @@ class User extends AuthBaseModel
         'email',
         'password',
         'phone',
+        'email_verified_at',
+        'sub_domain',
+        'last_name',
     ];
 
     /**

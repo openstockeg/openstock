@@ -5,12 +5,17 @@ namespace App\Models\Helper;
 
 use App\Enums\OTPThrough;
 use App\Enums\OTPType;
+use App\Http\Resources\Auth\UserResource;
 use App\Models\Device;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 trait AuthBaseHelper
 {
+    public function getResource(): UserResource
+    {
+        return UserResource::make($this);
+    }
     /**
      * Send the verification code.
      * @param  string  $identifierType
@@ -22,8 +27,10 @@ trait AuthBaseHelper
         // get identifier according to identifier type
         if ($identifierType == OTPThrough::PHONE) {
             $identifier = $request->phone ?? $this->phone;
-            $country_code = $request->country_code ?? $this->country_code;
-            $final = $country_code . $identifier;
+            //$country_code = $request->country_code ?? $this->country_code;
+            //$final = $country_code . $identifier;
+            $country_code = null;
+            $final = '+20' . $identifier;
         } else {
             $identifier = $request->email ?? $this->email;
             $country_code = null;

@@ -33,7 +33,7 @@ class ProfileBaseService
 
 
     /**
-     * Update the user profile
+     * UpdateProfile the user profile
      *
      * @param $request
      * @return array
@@ -43,7 +43,7 @@ class ProfileBaseService
         // Get the currently authenticated entity
         $entity = auth()->user();
 
-        // Update the user's data
+        // UpdateProfile the user's data
         $entity->update($request);
 
         // Return the updated user data
@@ -52,7 +52,7 @@ class ProfileBaseService
 
 
     /**
-     * Update the user's password
+     * UpdateProfile the user's password
      *
      * @param $request
      * @return array
@@ -67,7 +67,7 @@ class ProfileBaseService
             return ['key' => 'fail', 'msg' => __('auth.incorrect_pass'), 'user' => []];
         }
 
-        // Update the user's password
+        // UpdateProfile the user's password
         $entity->update(['password' => $request->password]);
 
         // Return success message
@@ -132,7 +132,7 @@ class ProfileBaseService
                 // delete the user's otp
                 $entity->otps()->where(['type' => OTPType::UPDATE_PHONE, 'code' => $request->code])->delete();
 
-                // Update the user's phone number
+                // UpdateProfile the user's phone number
                 $entity->update(['phone' => $request->phone, 'country_code' => $request->country_code]);
 
                 // Commit the transaction
@@ -206,7 +206,7 @@ class ProfileBaseService
                 // delete the user's otp
                 $entity->otps()->where(['type' => OTPType::UPDATE_EMAIL, 'code' => $request->code])->delete();
 
-                // Update the user's email
+                // UpdateProfile the user's email
                 $entity->update(['email' => $request->email]);
 
                 // Commit the transaction
@@ -224,7 +224,7 @@ class ProfileBaseService
     }
 
     /**
-     * Update the user's device language
+     * UpdateProfile the user's device language
      *
      * @param $request
      * @return array
@@ -234,7 +234,7 @@ class ProfileBaseService
         // Get the currently authenticated entity
         $entity = auth()->user();
 
-        // Update the user's current device language
+        // UpdateProfile the user's current device language
         $entity->currentDevice()->update(['preferred_locale' => $request->lang]);
 
         // Return success message
@@ -341,7 +341,7 @@ class ProfileBaseService
                 // delete the user's otp
                 $entity->otps()->where(['type' => OTPType::UPDATE_PHONE, 'code' => $request->code])->delete();
 
-                // Update the user's phone number
+                // UpdateProfile the user's phone number
                 $entity->update(['phone' => $request->phone, 'country_code' => $request->country_code]);
 
                 // Commit the transaction
@@ -365,7 +365,7 @@ class ProfileBaseService
 
 
     /**
-     * Update language
+     * UpdateProfile language
      * @param $request
      * @return array
      */
@@ -374,7 +374,7 @@ class ProfileBaseService
         // Get the currently authenticated entity
         $entity = auth()->user();
 
-        // Update the user's language
+        // UpdateProfile the user's language
         $entity->updateLang();
 
         // Set the application locale to the new language

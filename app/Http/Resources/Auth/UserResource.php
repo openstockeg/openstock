@@ -17,9 +17,12 @@ class UserResource extends JsonResource
         return [
             'id'           => $this->id,
             'name'         => $this->name,
+            'last_name'    => $this->last_name,
+            'currency'     => $this->currency,
+            'sub_domain'   => $this->sub_domain,
             'phone'        => $this->phone,
             'email'        => $this->email,
-            'token'        => request()->header('authorization') ?? $this->login(),
+            'token'        => $request->routeIs('login') ? request()->header('authorization') ?? $this->login() : null,
         ];
     }
 }

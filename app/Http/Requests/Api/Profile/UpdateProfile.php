@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Profile;
 
 use App\Enums\Currency;
 use App\Http\Requests\Api\ApiRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class Register extends ApiRequest
+class UpdateProfile extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,9 @@ class Register extends ApiRequest
     public function rules(): array
     {
         return [
-            'email'             => ['required', 'email', 'unique:users'],
-            'password'          => ['required', 'min:8', 'confirmed'],
-            'name'              => ['required', 'string', 'unique:users'],
+            'name'              => ['required', 'string'],
             'last_name'         => ['required', 'string'],
-            'phone'             => ['required', 'string', 'unique:users'],
-            'sub_domain'        => ['required', 'string', 'unique:users'],
+            'sub_domain'        => ['required', 'string', 'unique:users,sub_domain,' . auth()->id()],
             'currency'          => ['required', 'in:' . implode(',', Currency::toArray())],
         ];
     }
