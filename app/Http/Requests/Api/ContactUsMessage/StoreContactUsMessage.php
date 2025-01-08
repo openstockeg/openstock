@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\ContactUsMessage;
 
+use App\Enums\Currency;
 use App\Http\Requests\Api\ApiRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class Login extends ApiRequest
+class StoreContactUsMessage extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +24,11 @@ class Login extends ApiRequest
     public function rules(): array
     {
         return [
-            'sub_domain' => ['required', 'string'],
-            'password' => ['required', 'min:8'],
+            'name'              => ['required', 'string'],
+            'phone'             => ['required', 'string'],
+            'email'             => ['required', 'email'],
+            'title'             => ['required', 'string'],
+            'message'           => ['required', 'string'],
         ];
     }
 }

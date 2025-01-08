@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ContactUsMessage\ContactUsMessageController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\SocialMediaLink\SocialMediaLinkController;
 use App\Http\Controllers\StaticPage\StaticPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,13 @@ Route::group([],function () {
     // Static Page
     Route::get('/static-pages', [StaticPageController::class, 'index']);
     Route::get('/static-pages/{slug}', [StaticPageController::class, 'show']);
+
+    // Social Media Link
+    Route::get('/social-media', [SocialMediaLinkController::class, 'index']);
+    Route::get('/social-media/{slug}', [SocialMediaLinkController::class, 'show']);
+
+    // Contact Us
+    Route::post('/contact-us', [ContactUsMessageController::class, 'store']);
 });
 
 Route::group([

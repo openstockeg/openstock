@@ -30,8 +30,8 @@ class AuthBaseService
                 $q->where('phone', $request->phone)->where('country_code', $request->country_code);
             })->when($request->email, function ($q) use ($request) {
                 $q->where('email', $request->email);
-            })->when($request->name, function ($q) use ($request) {
-                $q->where('name', $request->name);
+            })->when($request->sub_domain, function ($q) use ($request) {
+                $q->where('sub_domain', $request->sub_domain);
             });
         })->first();
 
