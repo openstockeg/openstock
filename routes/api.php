@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContactUsMessage\ContactUsMessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\SocialMediaLink\SocialMediaLinkController;
 use App\Http\Controllers\StaticPage\StaticPageController;
@@ -37,4 +38,7 @@ Route::group([
     Route::get('/profile', [ProfileController::class, 'getProfile']);
     Route::post('/profile', [ProfileController::class, 'updateProfile']);
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
+
+    Route::get('/notifications/unread', [NotificationController::class, 'getUnreadNotifications']);
+    Route::get('/notifications/all', [NotificationController::class, 'getAllNotifications']);
 });
