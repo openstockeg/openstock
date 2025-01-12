@@ -127,6 +127,7 @@ return [
         'last_name'          => 'Last Name',
         'sub_domain'         => 'Sub Domain',
         'currency'           => 'Currency',
+        'code'               => 'Code',
     ],
 
 ];

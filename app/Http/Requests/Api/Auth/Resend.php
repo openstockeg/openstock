@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Api\Auth;
 
 use App\Http\Requests\Api\ApiRequest;
+use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class ResetPassword extends ApiRequest
+class Resend extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +24,17 @@ class ResetPassword extends ApiRequest
     public function rules(): array
     {
         return [
-           'sub_domain' => 'required|string',
-            'code' => 'required|string',
-            'password' => 'required|string|min:6',
+           'sub_domain' => 'required|string|exists:users,sub_domain',
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $user = User::where('sub_domain', $this->sub_domain)->first();
+            if ($user?->email_verified_at) {
+                $validator->errors()->add('sub_domain', __('auth.already_verified'));
+            }
+        });
     }
 }

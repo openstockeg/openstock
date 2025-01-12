@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Auth\Activate;
 use App\Http\Requests\Api\Auth\Complete;
 use App\Http\Requests\Api\Auth\ForgetPassword;
 use App\Http\Requests\Api\Auth\Login;
 use App\Http\Requests\Api\Auth\Register;
+use App\Http\Requests\Api\Auth\Resend;
 use App\Http\Requests\Api\Auth\ResetPassword;
 use App\Http\Requests\Api\Auth\VerifyForgetPassword;
 use App\Http\Resources\Auth\UserResource;
@@ -41,6 +43,24 @@ class AuthController extends Controller
     public function register(Register $request): JsonResponse
     {
         $res = $this->authenticationService->register($request->validated());
+        if ($res['key'] !== 'success') {
+            return response()->json($res, 401);
+        }
+        return response()->json($res);
+    }
+
+    public function activate(Activate $request): JsonResponse
+    {
+        $res = $this->authenticationService->activate($request);
+        if ($res['key'] !== 'success') {
+            return response()->json($res, 401);
+        }
+        return response()->json($res);
+    }
+
+    public function resend(Resend $request): JsonResponse
+    {
+        $res = $this->authenticationService->resendCode($request);
         if ($res['key'] !== 'success') {
             return response()->json($res, 401);
         }

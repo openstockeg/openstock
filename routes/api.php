@@ -16,6 +16,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/verify-forgot-password', [AuthController::class, 'verifyForgotPassword']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/resend', [AuthController::class, 'resend']);
+    Route::post('/activate', [AuthController::class, 'activate']);
 
 });
 Route::group([],function () {
@@ -32,7 +34,7 @@ Route::group([],function () {
 });
 
 Route::group([
-    'middleware' => 'auth:sanctum',
+    'middleware' => ['auth:sanctum', 'isActive'],
 ],function () {
     Route::post('/complete', [AuthController::class, 'complete']);
     Route::get('/profile', [ProfileController::class, 'getProfile']);

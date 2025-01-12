@@ -99,5 +99,6 @@ return [
         'last_name'          => 'الاسم الاخير',
         'sub_domain'         => 'الدومين',
         'currency'           => 'العملة',
+        'code'               => 'الكود',
     ],
 ];

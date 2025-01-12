@@ -209,4 +209,20 @@ trait AuthBaseHelper
         $this->tokens()->delete();
         return true;
     }
+
+    /**
+     * Mark the user as active/verified.
+     * @return $this
+     */
+    public function markAsActive(): static
+    {
+        // make user active
+        $this->update(['email_verified_at' => now()]);
+
+        // delete user otp
+        $this->otps()->where('type', OTPType::VERIFICATION)->delete();
+
+        return $this;
+    }
+
 }

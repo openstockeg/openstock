@@ -16,4 +16,7 @@ return [
     'profile_already_completed' => 'البيانات مكتملة بالفعل',
     'registered' => 'تم التسجيل بنجاح',
     'signed' => 'تم تسجيل الدخول بنجاح',
+    'not_active' => 'الحساب غير مفعل',
+    'already_verified' => 'الحساب مفعل بالفعل',
+    'invalid_code' => 'الرمز غير صحيح',
 ];

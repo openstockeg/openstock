@@ -12,12 +12,12 @@ class ContactUsMessageService
         $message = ContactUsMessage::create($data);
         return [
             'status' => 'success',
-            'message' => __('api.contact_us_message_stored')
+            'message' => __('apis.contact_us_message_stored')
         ];
        }catch (\Exception $e) {
           return [
             'status' => 'fail',
-            'message' => __('api.contact_us_message_not_stored')
+            'message' => __('apis.contact_us_message_not_stored')
           ];
          }
    }

@@ -16,4 +16,7 @@ return [
     'profile_already_completed' => 'Data already completed',
     'registered' => 'Registered successfully',
     'signed' => 'Logged in successfully',
+    'not_active' => 'Account not active',
+    'already_verified' => 'Account already verified',
+    'invalid_code' => 'Invalid code',
 ];
