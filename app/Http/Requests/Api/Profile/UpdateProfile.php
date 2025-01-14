@@ -28,6 +28,8 @@ class UpdateProfile extends ApiRequest
             'last_name'         => ['required', 'string'],
             'sub_domain'        => ['required', 'string', 'unique:users,sub_domain,' . auth()->id()],
             'currency'          => ['required', 'in:' . implode(',', Currency::toArray())],
+            'email'             => ['required', 'email', 'unique:users,email,' . auth()->id()],
+            'phone'             => ['required', 'string', 'unique:users,phone,' . auth()->id()],
         ];
     }
 }

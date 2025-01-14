@@ -23,4 +23,11 @@ class NotificationController extends Controller
         $notifications = $user->notifications()->paginate(10);
         return response()->json(NotificationsCollection::make($notifications));
     }
+
+    public function getNotificationCount(Request $request): JsonResponse
+    {
+        $user = auth()->user();
+        $count = $user->unreadNotifications()->count();
+        return response()->json(['count' => $count]);
+    }
 }
