@@ -30,4 +30,15 @@ class NotificationController extends Controller
         $count = $user->unreadNotifications()->count();
         return response()->json(['count' => $count]);
     }
+
+    public function deleteNotification(Request $request, $id): JsonResponse
+    {
+        $user = auth()->user();
+        $notification = $user->notifications()->where('id', $id)->first();
+        if ($notification) {
+            $notification->delete();
+            return response()->json(['message' => __('apis.notification_deleted')]);
+        }
+        return response()->json(['message' => __('apis.notification_not_found')], 404);
+    }
 }

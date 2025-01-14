@@ -44,4 +44,5 @@ Route::group([
     Route::get('/notifications/unread', [NotificationController::class, 'getUnreadNotifications']);
     Route::get('/notifications/all', [NotificationController::class, 'getAllNotifications']);
     Route::get('/notifications/count', [NotificationController::class, 'getNotificationCount']);
+    Route::delete('/notifications/{id}', [NotificationController::class, 'deleteNotification']);
 });
