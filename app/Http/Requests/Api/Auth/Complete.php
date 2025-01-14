@@ -26,15 +26,13 @@ class Complete extends ApiRequest
     {
         return [
             'name' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'store_name' => ['required', 'string'],
-            'activity' => ['required', 'in:' . implode(',', StoreActivityType::toArray())],
-            'lat' => ['required', 'string'],
-            'lng' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'commercial_register' => ['required', 'string'],
+            'addresses' => ['required', 'array'],
+            'addresses.*.address' => ['required', 'string'],
+            'addresses.*.name' => ['required', 'string'],
+            'addresses.*.lat' => ['required', 'numeric'],
+            'addresses.*.lng' => ['required', 'numeric'],
+            'commercial_register' => ['nullable', 'string'],
             'currency' => ['required', 'in:' . implode(',', Currency::toArray())],
-            'store_size' => ['required', 'in:small,medium,large'],
         ];
     }
 }

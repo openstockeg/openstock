@@ -75,31 +75,21 @@ class AuthenticationService extends AuthBaseService
      */
     public function completeProfile($request): array
     {
-
         try {
             DB::beginTransaction();
             $this->entity = auth()->user();
-            if ($this->entity->merchant) {
+            if ($this->entity->store) {
                 return [
                     'key' => 'fail',
                     'msg' => __('auth.profile_already_completed'),
                 ];
             }
-            $merchant = $this->entity->merchant()->create([
+            $store = $this->entity->store()->create([
                 'name' => $request->get('name'),
-                'description' => $request->get('description'),
-            ]);
-
-            $merchant->store()->create([
-                'name' => $request->get('store_name'),
-                'activity' => $request->get('activity'),
-                'lat' => $request->get('lat'),
-                'lng' => $request->get('lng'),
-                'address' => $request->get('address'),
                 'commercial_register' => $request->get('commercial_register'),
                 'currency' => $request->get('currency'),
-                'store_size' => $request->get('store_size'),
             ]);
+            $store->addresses()->createMany($request->get('addresses'));
 
             DB::commit();
 

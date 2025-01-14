@@ -128,6 +128,7 @@ return [
         'sub_domain'         => 'Sub Domain',
         'currency'           => 'Currency',
         'code'               => 'Code',
+        'addresses'          => 'Addresses',
     ],
 
 ];

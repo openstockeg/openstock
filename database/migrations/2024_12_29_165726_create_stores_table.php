@@ -16,15 +16,10 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Merchant::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->enum('activity', StoreActivityType::toArray())->default(StoreActivityType::Retal);
-            $table->string('lat')->nullable();
-            $table->string('lng')->nullable();
-            $table->string('address')->nullable();
-            $table->string('commercial_register');
+            $table->string('commercial_register')->nullable();
             $table->enum('currency', Currency::toArray())->default(Currency::EGP);
-            $table->enum('store_size', ['small', 'medium', 'large'])->default('small');
             $table->timestamps();
         });
     }

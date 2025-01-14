@@ -70,9 +70,9 @@ class User extends AuthBaseModel
         return $this->morphOne(Device::class, 'devicable')->where('is_current', true);
     }
 
-    public function merchant(): HasOne
+    public function store(): HasOne
     {
-        return $this->hasOne(Merchant::class);
+        return $this->hasOne(Store::class);
     }
 
 }

@@ -100,5 +100,6 @@ return [
         'sub_domain'         => 'الدومين',
         'currency'           => 'العملة',
         'code'               => 'الكود',
+        'addresses'          => 'العناوين',
     ],
 ];

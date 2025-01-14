@@ -4,25 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Store extends Model
 {
     protected $fillable = [
         'name',
-        'merchant_id',
-        'activity',
-        'lat',
-        'lng',
-        'address',
+        'user_id',
         'commercial_register',
         'currency',
-        'store_size',
     ];
 
 
     // Relationship
-    public function merchant(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Merchant::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(StoreAddress::class);
     }
 }

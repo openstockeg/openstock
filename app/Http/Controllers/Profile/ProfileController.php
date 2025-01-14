@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
     public function updateProfile(UpdateProfile $request): JsonResponse
     {
-        $res = $this->profileBaseService->updateProfile($request->validated());
+        $res = $this->profileBaseService->updateProfile($request);
         return response()->json($res);
     }
 
