@@ -129,6 +129,8 @@ return [
         'currency'           => 'Currency',
         'code'               => 'Code',
         'addresses'          => 'Addresses',
+        'logo'               => 'Logo',
+        'profile_updated'    => 'Profile Updated',
     ],
 
 ];

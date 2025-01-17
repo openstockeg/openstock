@@ -17,8 +17,10 @@ class StoreResource extends JsonResource
         return [
             'id'           => $this->id,
             'name'         => $this->name,
+            'logo'         => $this->getFirstMediaUrl('logo'),
             'currency'     => $this->currency,
             'commercial_register' => $this->commercial_register,
+            'commercial_register_image' => $this->getFirstMediaUrl('commercial_register_image'),
             'addresses'    => AddressResource::collection($this->addresses),
         ];
     }

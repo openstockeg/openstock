@@ -11,6 +11,7 @@ use App\Http\Requests\Api\Auth\ResetPassword;
 use App\Http\Requests\Api\Auth\VerifyForgetPassword;
 use App\Http\Requests\Api\Profile\UpdatePassword;
 use App\Http\Requests\Api\Profile\UpdateProfile;
+use App\Http\Requests\Api\Profile\UpdateStore;
 use App\Http\Resources\Auth\UserResource;
 use App\Services\Auth\ProfileBaseService;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +34,12 @@ class ProfileController extends Controller
     public function updateProfile(UpdateProfile $request): JsonResponse
     {
         $res = $this->profileBaseService->updateProfile($request);
+        return response()->json($res);
+    }
+
+    public function updateStore(UpdateStore $request): JsonResponse
+    {
+        $res = $this->profileBaseService->updateStore($request);
         return response()->json($res);
     }
 

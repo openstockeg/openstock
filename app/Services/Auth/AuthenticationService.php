@@ -90,6 +90,10 @@ class AuthenticationService extends AuthBaseService
                 'currency' => $request->get('currency'),
             ]);
             $store->addresses()->createMany($request->get('addresses'));
+            $store->addMediaFromRequest('logo')->toMediaCollection('logo');
+            if ($request->hasFile('commercial_register_image')) {
+                $store->addMediaFromRequest('commercial_register_image')->toMediaCollection('commercial_register_image');
+            }
 
             DB::commit();
 

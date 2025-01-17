@@ -50,6 +50,52 @@ class ProfileBaseService
         return ['key' => 'success', 'msg' => __('auth.account_updated'), 'user' => $entity->refresh()->getResource()];
     }
 
+    /**
+     * Update the user profile based on the provided data.
+     * @param $request
+     * @return array
+     */
+    public function updateStore($request): array
+    {
+        try {
+            DB::beginTransaction();
+            $this->entity = auth()->user();
+            $store = $this->entity->store;
+            $store->update([
+                'name' => $request->get('name'),
+                'commercial_register' => $request->get('commercial_register'),
+                'currency' => $request->get('currency'),
+            ]);
+            $store->addresses()->createMany($request->get('new_addresses'));
+            if ($request->has('remove_addresses')){
+                $store->addresses()->whereIn('id', $request->get('remove_addresses'))->delete();
+            }
+            if ($request->hasFile('logo')) {
+                $store->clearMediaCollection('logo');
+                $store->addMediaFromRequest('logo')->toMediaCollection('logo');
+            }
+            if ($request->hasFile('commercial_register_image')) {
+                $store->clearMediaCollection('commercial_register_image');
+                $store->addMediaFromRequest('commercial_register_image')->toMediaCollection('commercial_register_image');
+            }
+
+            DB::commit();
+
+            return [
+                'key' => 'success',
+                'msg' => __('auth.profile_updated'),
+            ];
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return [
+                'key' => 'fail',
+                'msg' => $e->getMessage(),
+                'user' => []
+            ];
+        }
+    }
+
 
     /**
      * UpdateProfile the user's password
