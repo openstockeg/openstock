@@ -16,6 +16,9 @@ class SocialMediaLinkController extends Controller
 
     public function show($slug): JsonResponse
     {
+        if (!SocialMediaLink::where('slug', $slug)->exists()) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
         return response()->json(SocialMediaLinkResource::make(SocialMediaLink::where('slug', $slug)->first()));
     }
 }

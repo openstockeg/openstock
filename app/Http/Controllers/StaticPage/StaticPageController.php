@@ -16,6 +16,9 @@ class StaticPageController extends Controller
 
     public function show($slug): JsonResponse
     {
+        if (!StaticPage::where('slug', $slug)->exists()) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
         return response()->json(StaticPageResource::make(StaticPage::where('slug', $slug)->first()));
     }
 }
