@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Validation\UnauthorizedException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,5 +23,19 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        // custom unauthenticated exception
+        if (request()->is('api/*')) {
+            $exceptions->render(function (AuthenticationException $exception) {
+                return response()->json(['message' => 'Unauthenticated'], 401);
+            });
+            $exceptions->render(function (Exception $exception) {
+                if (!$exception instanceof \Illuminate\Validation\ValidationException) {
+                    return response()->json([
+                        'message' => $exception->getMessage(),
+                        'file' => $exception->getFile(),
+                        'line' => $exception->getLine(),
+                    ], 500);
+                }
+            });
+        }
     })->create();

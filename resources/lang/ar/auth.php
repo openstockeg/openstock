@@ -19,4 +19,5 @@ return [
     'not_active' => 'الحساب غير مفعل',
     'already_verified' => 'الحساب مفعل بالفعل',
     'invalid_code' => 'الرمز غير صحيح',
+    'profile_updated' => 'تم تحديث الملف الشخصي بنجاح',
 ];
