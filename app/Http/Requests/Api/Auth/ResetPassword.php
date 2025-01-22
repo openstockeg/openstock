@@ -26,7 +26,7 @@ class ResetPassword extends ApiRequest
            'phone' => 'required_without:email|string',
             'email' => 'required_without:phone|string',
             'code' => 'required|string',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
         ];
     }
 }
