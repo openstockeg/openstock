@@ -27,7 +27,8 @@ class AuthBaseService
     {
         $entity = $this->model::where(function ($query) use ($request) {
             $query->when($request->phone, function ($q) use ($request) {
-                $q->where('phone', $request->phone)->where('country_code', $request->country_code);
+                $q->where('phone', $request->phone);
+                    //->where('country_code', $request->country_code);
             })->when($request->email, function ($q) use ($request) {
                 $q->where('email', $request->email);
             })->when($request->sub_domain, function ($q) use ($request) {

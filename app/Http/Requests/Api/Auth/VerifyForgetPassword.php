@@ -23,7 +23,7 @@ class VerifyForgetPassword extends ApiRequest
     public function rules(): array
     {
         return [
-           'sub_domain' => 'required|string|exists:users,sub_domain',
+           'phone' => 'required|string|exists:users,phone',
             'code' => 'required|string',
         ];
     }

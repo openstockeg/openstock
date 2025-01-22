@@ -23,7 +23,7 @@ class ResetPassword extends ApiRequest
     public function rules(): array
     {
         return [
-           'sub_domain' => 'required|string',
+           'phone' => 'required|string',
             'code' => 'required|string',
             'password' => 'required|string|min:6',
         ];
