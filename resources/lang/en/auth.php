@@ -20,4 +20,5 @@ return [
     'already_verified' => 'Account already verified',
     'invalid_code' => 'Invalid code',
     'profile_updated' => 'Profile updated successfully',
+    'unVerified' => 'Account not verified',
 ];

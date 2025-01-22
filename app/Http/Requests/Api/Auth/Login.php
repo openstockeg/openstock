@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Auth;
 
 use App\Http\Requests\Api\ApiRequest;
+use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class Login extends ApiRequest
@@ -26,5 +27,17 @@ class Login extends ApiRequest
             'sub_domain' => ['required', 'string'],
             'password' => ['required', 'min:8'],
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $user = User::where('sub_domain', $this->sub_domain)
+                ->where('email_verified_at', '!=', null)
+                ->first();
+            if (!$user) {
+                $validator->errors()->add('sub_domain', __('auth.unVerified'));
+            }
+        });
     }
 }
