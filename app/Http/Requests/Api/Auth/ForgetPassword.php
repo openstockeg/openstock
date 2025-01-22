@@ -23,7 +23,8 @@ class ForgetPassword extends ApiRequest
     public function rules(): array
     {
         return [
-           'phone' => 'required|string|exists:users,phone',
+           'phone' => 'required_without:email|string|exists:users,phone',
+            'email' => 'required_without:phone|string|exists:users,email',
         ];
     }
 }
