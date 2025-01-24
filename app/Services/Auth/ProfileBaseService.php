@@ -65,6 +65,8 @@ class ProfileBaseService
                 'name' => $request->get('name'),
                 'commercial_register' => $request->get('commercial_register'),
                 'currency' => $request->get('currency'),
+                'phone' => $request->get('phone') ?? $this->entity->phone,
+                'email' => $request->get('email') ?? $this->entity->email,
             ]);
             $store->addresses()->createMany($request->get('new_addresses'));
             if ($request->has('remove_addresses')){

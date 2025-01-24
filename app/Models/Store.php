@@ -16,6 +16,8 @@ class Store extends Model implements HasMedia
         'user_id',
         'commercial_register',
         'currency',
+        'email',
+        'phone',
     ];
 
 

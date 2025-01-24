@@ -35,6 +35,8 @@ class Complete extends ApiRequest
             'logo' => ['required', 'image'],
             'commercial_register_image' => ['nullable', 'image'],
             'currency' => ['required', 'in:' . implode(',', Currency::toArray())],
+            'phone' => ['nullable', 'string'],
+            'email' => ['nullable', 'email'],
         ];
     }
 }

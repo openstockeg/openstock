@@ -88,6 +88,8 @@ class AuthenticationService extends AuthBaseService
                 'name' => $request->get('name'),
                 'commercial_register' => $request->get('commercial_register'),
                 'currency' => $request->get('currency'),
+                'phone' => $request->get('phone') ?? null,
+                'email' => $request->get('email') ?? null,
             ]);
             $store->addresses()->createMany($request->get('addresses'));
             $store->addMediaFromRequest('logo')->toMediaCollection('logo');

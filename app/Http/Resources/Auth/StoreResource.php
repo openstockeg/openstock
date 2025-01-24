@@ -20,6 +20,8 @@ class StoreResource extends JsonResource
             'logo'         => $this->getFirstMediaUrl('logo'),
             'currency'     => $this->currency,
             'commercial_register' => $this->commercial_register,
+            'email'        => $this->email,
+            'phone'        => $this->phone,
             'commercial_register_image' => $this->getFirstMediaUrl('commercial_register_image'),
             'addresses'    => AddressResource::collection($this->addresses),
         ];

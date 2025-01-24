@@ -37,6 +37,8 @@ class UpdateStore extends ApiRequest
             'logo' => ['nullable', 'image'],
             'commercial_register_image' => ['nullable', 'image'],
             'currency' => ['required', 'in:' . implode(',', Currency::toArray())],
+            'phone' => ['nullable', 'string'],
+            'email' => ['nullable', 'email'],
         ];
     }
 }
