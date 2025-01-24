@@ -44,7 +44,7 @@ class ProfileBaseService
         $entity = auth()->user();
 
         // UpdateProfile the user's data
-        $entity->update($request);
+        $entity->update($request->validated());
 
         // Return the updated user data
         return ['key' => 'success', 'msg' => __('auth.account_updated'), 'user' => $entity->refresh()->getResource()];
