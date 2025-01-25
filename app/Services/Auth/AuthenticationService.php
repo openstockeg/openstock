@@ -128,7 +128,6 @@ class AuthenticationService extends AuthBaseService
         // define the identifier type
         $identifier_type = $this->getIdentifierType($request);
 
-        $entity->otps()->where('type', OTPType::VERIFICATION)->delete();
         // Send the verification code to the user
         $entity->sendVerificationCode($identifier_type, OTPType::VERIFICATION);
 
