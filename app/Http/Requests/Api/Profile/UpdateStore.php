@@ -32,7 +32,7 @@ class UpdateStore extends ApiRequest
             'new_addresses.*.lat' => ['required', 'numeric'],
             'new_addresses.*.lng' => ['required', 'numeric'],
             'remove_addresses' => ['nullable', 'array'],
-            'remove_addresses.*' => ['required', 'exists:addresses,id,store_id,' . auth()->user()?->store?->id],
+            'remove_addresses.*' => ['required', 'exists:store_addresses,id,store_id,' . auth()->user()?->store?->id],
             'commercial_register' => ['nullable', 'string'],
             'logo' => ['nullable', 'image'],
             'commercial_register_image' => ['nullable', 'image'],
