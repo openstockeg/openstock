@@ -34,7 +34,9 @@ class Activate extends ApiRequest
     {
         $validator->after(function ($validator) {
             $user = User::where('sub_domain', $this->sub_domain)->first();
-            if ($user?->otps()->where('code', $this->code)->where('type', OTPType::VERIFICATION)->where('expired_at', '>', now())->doesntExist()) {
+            if ($user?->otps()->where('code', $this->code)->where('type', OTPType::VERIFICATION)
+                //->where('expired_at', '>', now())
+                ->doesntExist()) {
                 $validator->errors()->add('code', __('auth.invalid_code'));
             }
         });
