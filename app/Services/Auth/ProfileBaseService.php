@@ -68,7 +68,9 @@ class ProfileBaseService
                 'phone' => $request->get('phone') ?? $this->entity->phone,
                 'email' => $request->get('email') ?? $this->entity->email,
             ]);
-            $store->addresses()->createMany($request->get('new_addresses'));
+            if ($request->has('new_addresses')){
+                $store->addresses()->createMany($request->get('new_addresses'));
+            }
             if ($request->has('remove_addresses')){
                 $store->addresses()->whereIn('id', $request->get('remove_addresses'))->delete();
             }
