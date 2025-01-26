@@ -23,7 +23,7 @@ class UserResource extends JsonResource
             'phone'        => $this->phone,
             'email'        => $this->email,
             'registered_as_store' => (bool)$this->store,
-            'token'        => $this->when($request->routeIs('login'), request()->header('authorization') ?? $this->login()),
+            'token'        => $this->when($request->routeIs('login'), $this->login()),
             'store'         => $this->when($request->routeIs('profile'), StoreResource::make($this->store)),
         ];
     }
