@@ -14,6 +14,10 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $token = null;
+        if  ($request->routeIs('login')) {
+            $token = $this->login();
+        }
         return [
             'id'           => $this->id,
             'name'         => $this->name,
@@ -23,7 +27,7 @@ class UserResource extends JsonResource
             'phone'        => $this->phone,
             'email'        => $this->email,
             'registered_as_store' => (bool)$this->store,
-            'token'        => $this->when($request->routeIs('login'), $this->login()),
+            'token'        => $this->when($request->routeIs('login'), $token),
             'store'         => $this->when($request->routeIs('profile'), StoreResource::make($this->store)),
         ];
     }
