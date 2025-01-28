@@ -1,0 +1,23 @@
+
+name: Laravel
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy On Server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        username: 'u435359519'
+        password: 'Pa$$w0rd!user'
+        host: '45.84.207.216'
+        port: '65002'
+        script: 'cd domains/host.openstockeg.com/public_html/ &&  ./deploy.sh'
