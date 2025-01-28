@@ -1,11 +1,10 @@
-
 #!/bin/sh
 # activate maintenance mode
 # php artisan down
 
 # update source code
 git pull origin main --rebase
-
+php artisan opt:clear
 # php artisan migrate:fresh --seed
 
 # update PHP dependencies
