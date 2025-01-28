@@ -4,7 +4,7 @@
 
 # update source code
 git pull origin develop --rebase
-
+php artisan opt:clear
 # update PHP dependencies
 #composer install --no-interaction --prefer-dist
 # composer install
