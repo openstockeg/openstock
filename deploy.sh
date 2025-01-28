@@ -3,9 +3,7 @@
 # php artisan down
 
 # update source code
-git pull origin main --rebase
-php artisan opt:clear
-# php artisan migrate:fresh --seed
+git pull develop --rebase
 
 # update PHP dependencies
 #composer install --no-interaction --prefer-dist
