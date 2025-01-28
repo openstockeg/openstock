@@ -3,7 +3,7 @@
 # php artisan down
 
 # update source code
-git pull develop --rebase
+git pull origin develop --rebase
 
 # update PHP dependencies
 #composer install --no-interaction --prefer-dist
